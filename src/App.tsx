@@ -1,10 +1,12 @@
 import "./App.css";
 
+import { PasswordGenerator } from "./assets/PasswordGenerator";
+
 function App() {
   return (
-    <>
-      <div>Hello World</div>
-    </>
+    <main>
+      <PasswordGenerator />
+    </main>
   );
 }
 
