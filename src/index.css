@@ -18,6 +18,7 @@ html {
   font-size: 62.5%;
   box-sizing: border-box;
   min-height: 100%;
+  color: #eaeaea;
 }
 
 main {
@@ -35,6 +36,7 @@ main {
   width: 370px;
   height: 70vh;
   border-radius: 10px;
+  justify-content: space-around;
   /* -webkit-box-shadow: 0px 0px 50px 11px rgba(204, 0, 153, 0.2);
   box-shadow: 0px 0px 50px 11px rgba(204, 0, 153, 0.2); */
   align-items: center;
