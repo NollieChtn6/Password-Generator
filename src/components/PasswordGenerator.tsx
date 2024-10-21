@@ -15,7 +15,7 @@ export function PasswordGenerator() {
   const [passwordOptions, setPasswordOptions] = useState<Password>({
     nbOfCharacters: 12,
     hasUpperCase: false,
-    hasLowerCase: true,
+    hasLowerCase: false,
     hasSymbols: false,
     hasNumbers: false,
     hasSpecialCharacters: false,
@@ -39,21 +39,25 @@ export function PasswordGenerator() {
     }));
   };
 
-  // Fonction pour générer un mot de passe
+  // Code snippet: https://www.geeksforgeeks.org/how-to-generate-random-password-in-react/
+
   const generatePassword = (options: Password) => {
     const lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
     const uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const numberChars = "0123456789";
     const symbolChars = "!@#$%^&*()_+[]{}|;:,.<>?";
 
-    let str = "";
+    let str = "abcdefghijklmnopqrstuvwxyz";
     if (options.hasLowerCase) str += lowercaseChars;
     if (options.hasUpperCase) str += uppercaseChars;
     if (options.hasNumbers) str += numberChars;
     if (options.hasSpecialCharacters) str += symbolChars;
 
+    if (str === "") {
+      str = lowercaseChars;
+    }
     let newPassword = "";
-    for (let i = 0; i < options.nbOfCharacters; i++) {
+    for (let i = 0; i < passwordOptions.nbOfCharacters; i++) {
       const randomIndex = Math.floor(Math.random() * str.length);
       newPassword += str[randomIndex];
     }
@@ -64,12 +68,6 @@ export function PasswordGenerator() {
   const handleGenerateClick = () => {
     generatePassword(passwordOptions);
   };
-
-  const isOptionSelected =
-    passwordOptions.hasLowerCase ||
-    passwordOptions.hasUpperCase ||
-    passwordOptions.hasNumbers ||
-    passwordOptions.hasSpecialCharacters;
 
   return (
     <div className="generator-container">
@@ -84,9 +82,7 @@ export function PasswordGenerator() {
             value={generatedPassword || "Generate a password!"}
             disabled={true}
           />
-          <button type="button" onClick={() => navigator.clipboard.writeText(generatedPassword)}>
-            Copy
-          </button>
+          <button type="button">Copy</button>
         </div>
       </div>
 
@@ -104,19 +100,19 @@ export function PasswordGenerator() {
       <div className="options-container">
         <div className="option">
           <Checkbox
-            name="hasUpperCase"
-            onChange={handleCheckBox}
-            checked={passwordOptions.hasUpperCase}
-          />
-          <p>Include Uppercase</p>
-        </div>
-        <div className="option">
-          <Checkbox
             name="hasLowerCase"
             onChange={handleCheckBox}
             checked={passwordOptions.hasLowerCase}
           />
           <p>Include Lowercase</p>
+        </div>
+        <div className="option">
+          <Checkbox
+            name="hasUpperCase"
+            onChange={handleCheckBox}
+            checked={passwordOptions.hasUpperCase}
+          />
+          <p>Include Upperase</p>
         </div>
         <div className="option">
           <Checkbox
@@ -132,12 +128,12 @@ export function PasswordGenerator() {
             onChange={handleCheckBox}
             checked={passwordOptions.hasSpecialCharacters}
           />
-          <p>Include Special Characters</p>
+          <p>Include special characters</p>
         </div>
       </div>
 
       <div className="button-container">
-        <button type="button" onClick={handleGenerateClick} disabled={!isOptionSelected}>
+        <button type="button" onClick={handleGenerateClick}>
           Generate password!
         </button>
       </div>
