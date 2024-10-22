@@ -70,16 +70,16 @@ export function PasswordGenerator() {
     const numberChars = "0123456789";
     const symbolChars = "!@#$%^&*()_+[]{}|;:,.<>?";
 
-    let str = "";
-    if (options.hasLowerCase) str += lowercaseChars;
-    if (options.hasUpperCase) str += uppercaseChars;
-    if (options.hasNumbers) str += numberChars;
-    if (options.hasSpecialCharacters) str += symbolChars;
+    let selectedCharacters = "";
+    if (options.hasLowerCase) selectedCharacters += lowercaseChars;
+    if (options.hasUpperCase) selectedCharacters += uppercaseChars;
+    if (options.hasNumbers) selectedCharacters += numberChars;
+    if (options.hasSpecialCharacters) selectedCharacters += symbolChars;
 
     let newPassword = "";
     for (let i = 0; i < options.nbOfCharacters; i++) {
       const randomIndex = Math.floor(Math.random() * str.length);
-      newPassword += str[randomIndex];
+      newPassword += selectedCharacters[randomIndex];
     }
 
     setGeneratedPassword(newPassword);
