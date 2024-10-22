@@ -1,19 +1,19 @@
-import { useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react"; // Imports React
+import { CopyToClipboard } from "react-copy-to-clipboard"; // Bibliothèque pour copier au presse-papiers
 
-import { CopyToClipboard } from "react-copy-to-clipboard";
-
+// Imports PrimeReact
 import { Button } from "primereact/button";
 import { Checkbox, type CheckboxChangeEvent } from "primereact/checkbox";
 import { InputText } from "primereact/inputtext";
 import { Slider, type SliderChangeEvent } from "primereact/slider";
-import { useState } from "react";
-
-import { Files } from "lucide-react";
-
+import { ProgressBar } from "primereact/progressbar";
 import { Toast } from "primereact/toast";
 import { Tooltip } from "primereact/tooltip";
-import { ProgressBar } from "primereact/progressbar";
 
+// Imports d'icônes
+import { Files } from "lucide-react";
+
+// Imports de votre propre projet
 import { usePasswordStore } from "../store/passwordStore";
 
 export function PasswordGenerator() {
