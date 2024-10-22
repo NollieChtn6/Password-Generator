@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
@@ -12,16 +12,19 @@ import { Files } from "lucide-react";
 
 import { Toast } from "primereact/toast";
 import { Tooltip } from "primereact/tooltip";
+import { ProgressBar } from "primereact/progressbar";
 
 import { usePasswordStore } from "../store/passwordStore";
 
 export function PasswordGenerator() {
-  const { passwordOptions, setPasswordOptions, generatePassword } = usePasswordStore();
+  const { passwordOptions, setPasswordOptions, generatePassword, assessPasswordStrength } =
+    usePasswordStore();
   const toast = useRef<Toast>(null);
 
   const [generatedPassword, setGeneratedPassword] = useState<string>("");
 
   const [_passwordIsCopied, setPasswordIsCopied] = useState<boolean>(false);
+  const [passwordStrength, setPasswordStrength] = useState<number>(0);
 
   const onCopyPassword = () => {
     setPasswordIsCopied(true);
@@ -55,6 +58,21 @@ export function PasswordGenerator() {
     passwordOptions.hasNumbers ||
     passwordOptions.hasSpecialCharacters;
 
+  const strengthPercentage = passwordStrength * 20;
+
+  useEffect(() => {
+    if (generatedPassword) {
+      const strength = assessPasswordStrength(generatedPassword);
+      setPasswordStrength(strength);
+    }
+  }, [generatedPassword, assessPasswordStrength]);
+
+  const getProgressBarStep = () => {
+    if (passwordStrength <= 2) return "weak";
+    if (passwordStrength <= 4) return "medium";
+    return "strong";
+  };
+
   return (
     <div className="generator-container">
       <h1 className="title">Random password generator</h1>
@@ -84,6 +102,15 @@ export function PasswordGenerator() {
             <Files />
           </Button>
         </CopyToClipboard>
+      </div>
+
+      <div className="strength-container">
+        <p className="label-text">Password Strength: {getProgressBarStep()}</p>
+        <ProgressBar
+          value={strengthPercentage}
+          showValue={false}
+          className={`password-strength-bar ${getProgressBarStep()}`}
+        />
       </div>
 
       <div className="slider-container" style={{ position: "relative" }}>
