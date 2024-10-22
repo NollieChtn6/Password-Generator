@@ -37,12 +37,68 @@ main {
   height: 70vh;
   border-radius: 10px;
   justify-content: space-around;
-  /* -webkit-box-shadow: 0px 0px 50px 11px rgba(204, 0, 153, 0.2);
-  box-shadow: 0px 0px 50px 11px rgba(204, 0, 153, 0.2); */
+  -webkit-box-shadow: 0px 0px 50px 11px rgba(204, 0, 153, 0.2);
+  box-shadow: 0px 0px 50px 11px rgba(204, 0, 153, 0.2);
   align-items: center;
   padding: 1.5rem;
   h1 {
     color: var(--text-color);
     font-size: 2rem;
   }
+}
+
+.password-container {
+  display: flex;
+  width: 90%;
+  flex-direction: row;
+
+  justify-content: space-between;
+}
+
+.password-input {
+  /* background-color: lightgray; */
+  width: 70%;
+  color: var(--secondary-color);
+}
+
+.password-input::placeholder {
+  font-size: 1.2rem;
+}
+
+.slider-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 90%;
+}
+
+.options-container {
+  width: 90%;
+  height: 125px;
+  /* background-color: #cc0099; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 15px;
+  .option {
+    display: flex;
+    width: 80%;
+    gap: 15px;
+    margin: auto;
+  }
+}
+
+.checkbox {
+  border: #a3007a solid 1px;
+  border-radius: 4px;
+}
+
+.btn {
+  background-color: var(--primary-color);
+  padding: 12px 24px;
+  font-size: 1.2rem;
+}
+
+.label-text {
+  font-size: 1.5rem;
 }
