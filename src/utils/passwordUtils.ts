@@ -26,3 +26,16 @@ export const generatePassword = ({
 
   return newPassword;
 };
+
+export const checkPasswordStrength = (password: string): string => {
+  let score = 0;
+  if (/[a-z]/.test(password)) score++;
+  if (/[A-Z]/.test(password)) score++;
+  if (/\d/.test(password)) score++;
+  if (/[!@#$%^&*()_+[\]{}|;:,.<>?]/.test(password)) score++;
+  if (password.length > 20) score += 2;
+
+  if (score <= 2) return "Weak";
+  if (score === 3) return "Medium";
+  return "Strong";
+};
