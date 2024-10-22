@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from "react"; // Imports React
-import { CopyToClipboard } from "react-copy-to-clipboard"; // Bibliothèque pour copier au presse-papiers
+import { useEffect, useRef, useState } from "react";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
-// Imports PrimeReact
+// import UI components
 import { Button } from "primereact/button";
 import { Checkbox, type CheckboxChangeEvent } from "primereact/checkbox";
 import { InputText } from "primereact/inputtext";
@@ -10,10 +10,10 @@ import { ProgressBar } from "primereact/progressbar";
 import { Toast } from "primereact/toast";
 import { Tooltip } from "primereact/tooltip";
 
-// Imports d'icônes
+// import icons
 import { Files } from "lucide-react";
 
-// Imports de votre propre projet
+// import custom elements
 import { usePasswordStore } from "../store/passwordStore";
 
 export function PasswordGenerator() {
