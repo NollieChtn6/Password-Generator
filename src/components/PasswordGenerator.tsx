@@ -2,35 +2,21 @@ import { useRef } from "react";
 
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
-import { Slider, type SliderChangeEvent } from "primereact/slider";
-import { Checkbox, type CheckboxChangeEvent } from "primereact/checkbox";
-import { useState } from "react";
-import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
+import { Checkbox, type CheckboxChangeEvent } from "primereact/checkbox";
+import { InputText } from "primereact/inputtext";
+import { Slider, type SliderChangeEvent } from "primereact/slider";
+import { useState } from "react";
 
 import { Files } from "lucide-react";
 
-import { Tooltip } from "primereact/tooltip";
 import { Toast } from "primereact/toast";
+import { Tooltip } from "primereact/tooltip";
 
-type Password = {
-  nbOfCharacters: number;
-  hasUpperCase: boolean;
-  hasLowerCase: boolean;
-  hasSymbols: boolean;
-  hasNumbers: boolean;
-  hasSpecialCharacters: boolean;
-};
+import { usePasswordStore } from "../store/passwordStore";
 
 export function PasswordGenerator() {
-  const [passwordOptions, setPasswordOptions] = useState<Password>({
-    nbOfCharacters: 12,
-    hasUpperCase: false,
-    hasLowerCase: true,
-    hasSymbols: false,
-    hasNumbers: false,
-    hasSpecialCharacters: false,
-  });
+  const { passwordOptions, setPasswordOptions, generatePassword } = usePasswordStore();
   const toast = useRef<Toast>(null);
 
   const [generatedPassword, setGeneratedPassword] = useState<string>("");
@@ -50,43 +36,17 @@ export function PasswordGenerator() {
 
   const handleCheckBox = (e: CheckboxChangeEvent) => {
     const { name, checked } = e.target;
-    setPasswordOptions((prev) => ({
-      ...prev,
-      [name]: checked,
-    }));
+    setPasswordOptions({ [name]: checked });
   };
 
   const handleSlider = (e: SliderChangeEvent) => {
     const value = e.value as number;
-    setPasswordOptions((prev) => ({
-      ...prev,
-      nbOfCharacters: value,
-    }));
-  };
-
-  const generatePassword = (options: Password) => {
-    const lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
-    const uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const numberChars = "0123456789";
-    const symbolChars = "!@#$%^&*()_+[]{}|;:,.<>?";
-
-    let selectedCharacters = "";
-    if (options.hasLowerCase) selectedCharacters += lowercaseChars;
-    if (options.hasUpperCase) selectedCharacters += uppercaseChars;
-    if (options.hasNumbers) selectedCharacters += numberChars;
-    if (options.hasSpecialCharacters) selectedCharacters += symbolChars;
-
-    let newPassword = "";
-    for (let i = 0; i < options.nbOfCharacters; i++) {
-      const randomIndex = Math.floor(Math.random() * selectedCharacters.length);
-      newPassword += selectedCharacters[randomIndex];
-    }
-
-    setGeneratedPassword(newPassword);
+    setPasswordOptions({ nbOfCharacters: value });
   };
 
   const handleGenerateClick = () => {
-    generatePassword(passwordOptions);
+    const newPassword = generatePassword();
+    setGeneratedPassword(newPassword);
   };
 
   const isOptionSelected =
