@@ -78,7 +78,7 @@ export function PasswordGenerator() {
 
     let newPassword = "";
     for (let i = 0; i < options.nbOfCharacters; i++) {
-      const randomIndex = Math.floor(Math.random() * str.length);
+      const randomIndex = Math.floor(Math.random() * selectedCharacters.length);
       newPassword += selectedCharacters[randomIndex];
     }
 
