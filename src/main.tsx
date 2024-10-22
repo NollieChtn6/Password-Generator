@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./reset.css";
 import "./index.css";
-import "primereact/resources/themes/lara-light-cyan/theme.css";
+import "primereact/resources/themes/mdc-dark-deeppurple/theme.css";
 
 // https://www.codingdeft.com/posts/react-18-typescript-error/
 const rootElement = document.getElementById("root");
