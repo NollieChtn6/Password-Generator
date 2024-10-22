@@ -1,6 +1,8 @@
 import { Slider, type SliderChangeEvent } from "primereact/slider";
 import { Checkbox, type CheckboxChangeEvent } from "primereact/checkbox";
 import { useState } from "react";
+import { InputText } from "primereact/inputtext";
+import { Button } from "primereact/button";
 
 type Password = {
   nbOfCharacters: number;
@@ -75,18 +77,15 @@ export function PasswordGenerator() {
       <h1 className="title">Random password generator</h1>
 
       <div className="password-container">
-        <label htmlFor="password">Your password</label>
-        <div>
-          <input
-            type="text"
-            id="password"
-            value={generatedPassword || "Generate a password!"}
-            disabled={true}
-          />
-          <button type="button" onClick={() => navigator.clipboard.writeText(generatedPassword)}>
-            Copy
-          </button>
-        </div>
+        <InputText
+          type="text"
+          id="password"
+          value={generatedPassword || "Generate a password!"}
+          disabled={true}
+        />
+        <Button type="button" onClick={() => navigator.clipboard.writeText(generatedPassword)}>
+          Copy
+        </Button>
       </div>
 
       <div className="slider-container" style={{ position: "relative" }}>
@@ -136,9 +135,9 @@ export function PasswordGenerator() {
       </div>
 
       <div className="button-container">
-        <button type="button" onClick={handleGenerateClick} disabled={!isOptionSelected}>
+        <Button type="button" onClick={handleGenerateClick} disabled={!isOptionSelected}>
           Generate password!
-        </button>
+        </Button>
       </div>
     </div>
   );
