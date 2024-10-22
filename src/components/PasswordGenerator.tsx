@@ -1,8 +1,17 @@
+import { useRef } from "react";
+
+import { CopyToClipboard } from "react-copy-to-clipboard";
+
 import { Slider, type SliderChangeEvent } from "primereact/slider";
 import { Checkbox, type CheckboxChangeEvent } from "primereact/checkbox";
 import { useState } from "react";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
+
+import { Files } from "lucide-react";
+
+import { Tooltip } from "primereact/tooltip";
+import { Toast } from "primereact/toast";
 
 type Password = {
   nbOfCharacters: number;
@@ -22,8 +31,22 @@ export function PasswordGenerator() {
     hasNumbers: false,
     hasSpecialCharacters: false,
   });
+  const toast = useRef<Toast>(null);
 
   const [generatedPassword, setGeneratedPassword] = useState<string>("");
+
+  const [_passwordIsCopied, setPasswordIsCopied] = useState<boolean>(false);
+
+  const onCopyPassword = () => {
+    setPasswordIsCopied(true);
+    toast.current?.show({
+      severity: "success",
+      summary: "Success",
+      detail: "Password copied to clipboard!",
+      life: 3000,
+    });
+    setTimeout(() => setPasswordIsCopied(false), 3000);
+  };
 
   const handleCheckBox = (e: CheckboxChangeEvent) => {
     const { name, checked } = e.target;
@@ -85,13 +108,22 @@ export function PasswordGenerator() {
           className="password-input"
           readOnly={true}
         />
-        <Button
-          type="button"
-          onClick={() => navigator.clipboard.writeText(generatedPassword)}
-          className="btn"
-        >
-          Copy
-        </Button>
+        <CopyToClipboard text={generatedPassword} onCopy={onCopyPassword}>
+          <Button
+            type="button"
+            onClick={() => navigator.clipboard.writeText(generatedPassword)}
+            className="btn"
+            tooltip="Click to copy password"
+            tooltipOptions={{
+              showDelay: 1000,
+              hideDelay: 300,
+              position: "bottom",
+            }}
+            disabled={!generatePassword}
+          >
+            <Files />
+          </Button>
+        </CopyToClipboard>
       </div>
 
       <div className="slider-container" style={{ position: "relative" }}>
@@ -157,6 +189,8 @@ export function PasswordGenerator() {
           Generate password!
         </Button>
       </div>
+      <Tooltip />
+      <Toast ref={toast} />
     </div>
   );
 }
