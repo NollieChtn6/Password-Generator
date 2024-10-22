@@ -80,16 +80,24 @@ export function PasswordGenerator() {
         <InputText
           type="text"
           id="password"
-          value={generatedPassword || "Generate a password!"}
-          disabled={true}
+          value={generatedPassword}
+          placeholder="Generate a password!"
+          className="password-input"
+          readOnly={true}
         />
-        <Button type="button" onClick={() => navigator.clipboard.writeText(generatedPassword)}>
+        <Button
+          type="button"
+          onClick={() => navigator.clipboard.writeText(generatedPassword)}
+          className="btn"
+        >
           Copy
         </Button>
       </div>
 
       <div className="slider-container" style={{ position: "relative" }}>
-        <label htmlFor="slider">Number of characters: {passwordOptions.nbOfCharacters}</label>
+        <label htmlFor="slider" className="label-text">
+          Number of characters: {passwordOptions.nbOfCharacters}
+        </label>
         <Slider
           min={12}
           max={50}
@@ -100,42 +108,52 @@ export function PasswordGenerator() {
       </div>
 
       <div className="options-container">
+        <p className="label-text">Also include:</p>
         <div className="option">
           <Checkbox
             name="hasUpperCase"
             onChange={handleCheckBox}
             checked={passwordOptions.hasUpperCase}
+            className="checkbox"
           />
-          <p>Include Uppercase</p>
+          <p className="label-text">... uppercase letters</p>
         </div>
         <div className="option">
           <Checkbox
             name="hasLowerCase"
             onChange={handleCheckBox}
             checked={passwordOptions.hasLowerCase}
+            className="checkbox"
           />
-          <p>Include Lowercase</p>
+          <p className="label-text">... lowercase letters</p>
         </div>
         <div className="option">
           <Checkbox
             name="hasNumbers"
             onChange={handleCheckBox}
             checked={passwordOptions.hasNumbers}
+            className="checkbox"
           />
-          <p>Include Numbers</p>
+          <p className="label-text">... numbers</p>
         </div>
         <div className="option">
           <Checkbox
             name="hasSpecialCharacters"
             onChange={handleCheckBox}
             checked={passwordOptions.hasSpecialCharacters}
+            className="checkbox"
           />
-          <p>Include Special Characters</p>
+          <p className="label-text">... special characters</p>
         </div>
       </div>
 
       <div className="button-container">
-        <Button type="button" onClick={handleGenerateClick} disabled={!isOptionSelected}>
+        <Button
+          type="button"
+          onClick={handleGenerateClick}
+          disabled={!isOptionSelected}
+          className="btn"
+        >
           Generate password!
         </Button>
       </div>
