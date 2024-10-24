@@ -58,6 +58,7 @@ main {
 .password-input {
   width: 70%;
   color: var(--secondary-color);
+  font-size: 1.5rem;
 }
 
 .password-input::placeholder {
