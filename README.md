@@ -8,7 +8,7 @@ This  thirt project of the series was developed to provide users with a simple a
 
 The application supports various options, including uppercase letters, lowercase letters, numbers, and special characters, enabling users to tailor their passwords effectively.
 
-A deployed version of the project is is coming soon! 🚀
+A deployed [version](https://password-generator.nolliechtn6.com/) of the project is now available! 🚀
 
 ## ✨ Features
 
@@ -37,5 +37,5 @@ You are now ready to generate secure passwords!
 
 ## ✅ Future Improvements
 
-- [ ] Enhance password generator efficiency
-- [ ] Monitor password matching criteria
+- [x] Enhance password generator efficiency
+- [ ] Test password generation with Vitest
