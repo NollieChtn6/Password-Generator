@@ -17,7 +17,7 @@ import { Files } from "lucide-react";
 import { usePasswordStore } from "../store/passwordStore";
 
 export function PasswordGenerator() {
-  const { passwordOptions, setPasswordOptions, generatePassword, assessPasswordStrength } =
+  const { passwordOptions, setPasswordOptions, generateSecurePassword, assessPasswordStrength } =
     usePasswordStore();
   const toast = useRef<Toast>(null);
 
@@ -48,7 +48,7 @@ export function PasswordGenerator() {
   };
 
   const handleGenerateClick = () => {
-    const newPassword = generatePassword();
+    const newPassword = generateSecurePassword();
     setGeneratedPassword(newPassword);
   };
 
@@ -97,7 +97,6 @@ export function PasswordGenerator() {
               hideDelay: 300,
               position: "bottom",
             }}
-            disabled={!generatePassword}
           >
             <Files />
           </Button>
