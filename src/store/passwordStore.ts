@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-import { generatePassword, checkPasswordStrength } from "../utils/passwordUtils";
+import { generateSecurePassword, checkPasswordStrength } from "../utils/passwordUtils";
 
 export type PasswordOptions = {
   nbOfCharacters: number;
@@ -15,7 +15,7 @@ type PasswordStore = {
   passwordOptions: PasswordOptions;
   passwordStrength: number;
   setPasswordOptions: (options: Partial<PasswordOptions>) => void;
-  generatePassword: () => string;
+  generateSecurePassword: () => string;
   assessPasswordStrength: (password: string) => number;
 };
 
@@ -34,9 +34,13 @@ export const usePasswordStore = create<PasswordStore>((set) => ({
       passwordOptions: { ...state.passwordOptions, ...updatedPasswordOptions },
     })),
 
-  generatePassword: () => {
+  // generatePassword: () => {
+  //   const passwordOptions: PasswordOptions = usePasswordStore.getState().passwordOptions;
+  //   return generatePassword(passwordOptions);
+  // },
+  generateSecurePassword: (): string => {
     const passwordOptions: PasswordOptions = usePasswordStore.getState().passwordOptions;
-    return generatePassword(passwordOptions);
+    return generateSecurePassword(passwordOptions);
   },
   assessPasswordStrength: (password: string) => {
     const strengthScore = checkPasswordStrength(password);
