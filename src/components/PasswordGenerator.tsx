@@ -75,7 +75,7 @@ export function PasswordGenerator() {
 
   return (
     <div className="generator-container">
-      <h1 className="title">Random password generator</h1>
+      <h1 className="title">Random Password Generator</h1>
 
       <div className="password-container">
         <InputText
