@@ -31,7 +31,7 @@ describe("generateSecurePassword", () => {
   });
 
   it("should generate a password with lowercase and uppercase letters and numbers", () => {
-    const selectedOptions = {
+    const selectedOptions: PasswordOptions = {
       nbOfCharacters: 12,
       hasUpperCase: true,
       hasLowerCase: true,
@@ -44,7 +44,7 @@ describe("generateSecurePassword", () => {
   });
 
   it("should generate a password including all options and containing 30 characters", () => {
-    const selectedOptions = {
+    const selectedOptions: PasswordOptions = {
       nbOfCharacters: 30,
       hasUpperCase: true,
       hasLowerCase: true,
@@ -55,6 +55,19 @@ describe("generateSecurePassword", () => {
     expect(passwordToTest.length).toBe(selectedOptions.nbOfCharacters);
     expect(passwordToTest).toMatch(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\[\]{}|;:,.<>?])[a-zA-Z0-9!@#$%^&*()_+\[\]{}|;:,.<>?]+$/,
+    );
+  });
+
+  it("should throw an error if no option is selected", () => {
+    const selectedOptions: PasswordOptions = {
+      nbOfCharacters: 12,
+      hasUpperCase: false,
+      hasLowerCase: false,
+      hasNumbers: false,
+      hasSpecialCharacters: false,
+    };
+    expect(() => generateSecurePassword(selectedOptions)).toThrow(
+      "No character types selected for password generation.",
     );
   });
 });
