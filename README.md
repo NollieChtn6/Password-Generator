@@ -10,6 +10,8 @@ The application supports various options, including uppercase letters, lowercase
 
 A deployed [version](https://password-generator.nolliechtn6.com/) of the project is now available! 🚀
 
+This project was also a good opportunity to learn more about unit tests with Vitest.
+
 ## ✨ Features
 
 - **Customizable password options**: users can select the type of characters to include, such as uppercase, lowercase, numbers, and special characters.
@@ -38,4 +40,4 @@ You are now ready to generate secure passwords!
 ## ✅ Future Improvements
 
 - [x] Enhance password generator efficiency
-- [ ] Test password generation with Vitest
+- [x] Test password generation with Vitest
