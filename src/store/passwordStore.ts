@@ -16,7 +16,6 @@ export const usePasswordStore = create<PasswordStore>((set) => ({
     nbOfCharacters: 12,
     hasUpperCase: false,
     hasLowerCase: true,
-    hasSymbols: false,
     hasNumbers: false,
     hasSpecialCharacters: false,
   },
