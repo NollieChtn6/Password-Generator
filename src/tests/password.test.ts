@@ -16,6 +16,7 @@ describe("generateSecurePassword", () => {
     expect(passwordToTest.length).toBe(selectedOptions.nbOfCharacters);
     expect(passwordToTest).toMatch(/^[a-z]+$/);
   });
+
   it("should generate a password with lowercase and uppercase letters", () => {
     const selectedOptions: PasswordOptions = {
       nbOfCharacters: 12,
@@ -28,6 +29,7 @@ describe("generateSecurePassword", () => {
     expect(passwordToTest.length).toBe(selectedOptions.nbOfCharacters);
     expect(passwordToTest).toMatch(/^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z]+$/);
   });
+
   it("should generate a password with lowercase and uppercase letters and numbers", () => {
     const selectedOptions = {
       nbOfCharacters: 12,
@@ -36,10 +38,23 @@ describe("generateSecurePassword", () => {
       hasNumbers: true,
       hasSpecialCharacters: false,
     };
-
     const passwordToTest = generateSecurePassword(selectedOptions);
-
     expect(passwordToTest.length).toBe(selectedOptions.nbOfCharacters);
     expect(passwordToTest).toMatch(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$/);
+  });
+
+  it("should generate a password including all options and containing 30 characters", () => {
+    const selectedOptions = {
+      nbOfCharacters: 30,
+      hasUpperCase: true,
+      hasLowerCase: true,
+      hasNumbers: true,
+      hasSpecialCharacters: true,
+    };
+    const passwordToTest = generateSecurePassword(selectedOptions);
+    expect(passwordToTest.length).toBe(selectedOptions.nbOfCharacters);
+    expect(passwordToTest).toMatch(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\[\]{}|;:,.<>?])[a-zA-Z0-9!@#$%^&*()_+\[\]{}|;:,.<>?]+$/,
+    );
   });
 });
