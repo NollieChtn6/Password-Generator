@@ -1,15 +1,7 @@
 import { create } from "zustand";
 
 import { generateSecurePassword, checkPasswordStrength } from "../utils/passwordUtils";
-
-export type PasswordOptions = {
-  nbOfCharacters: number;
-  hasUpperCase: boolean;
-  hasLowerCase: boolean;
-  hasSymbols: boolean;
-  hasNumbers: boolean;
-  hasSpecialCharacters: boolean;
-};
+import type { PasswordOptions } from "../@types/types";
 
 type PasswordStore = {
   passwordOptions: PasswordOptions;
