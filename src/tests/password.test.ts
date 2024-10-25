@@ -16,4 +16,16 @@ describe("generateSecurePassword", () => {
     expect(passwordToTest.length).toBe(selectedOptions.nbOfCharacters);
     expect(passwordToTest).toMatch(/^[a-z]+$/);
   });
+  it("should generate a password with lowercase and uppercase letters", () => {
+    const selectedOptions: PasswordOptions = {
+      nbOfCharacters: 12,
+      hasUpperCase: true,
+      hasLowerCase: true,
+      hasNumbers: false,
+      hasSpecialCharacters: false,
+    };
+    const passwordToTest = generateSecurePassword(selectedOptions);
+    expect(passwordToTest.length).toBe(selectedOptions.nbOfCharacters);
+    expect(passwordToTest).toMatch(/^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z]+$/);
+  });
 });
