@@ -4,7 +4,7 @@
 
 <img src="./src/assets/result/password-generator_final_result.png" alt="Password generator interface" width="250"/>
 
-This  thirt project of the series was developed to provide users with a simple and efficient way to generate secure passwords.
+This  third project of the series was developed to provide users with a simple and efficient way to generate secure passwords.
 
 The application supports various options, including uppercase letters, lowercase letters, numbers, and special characters, enabling users to tailor their passwords effectively.
 
